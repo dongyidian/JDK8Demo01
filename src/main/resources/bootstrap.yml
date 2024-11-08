@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: JDK8Demo01
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+#actuator接口配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+  health:
+    rabbit:
+      enabled: false
+    sentinel:
+      enabled: false
+    redis:
+      enabled: false
+    db:
+      enabled: false
+info:
+  scm:
+    buildNumber: '@buildNumber@'
+  version: '@version@'
+  buildTime: '@buildTime@'
+
+logging:
+  level:
+    root: info
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+log_dir: /data/logs/app/${spring.application.name}
+#logging:
+#  level:
+#    com.huobi.neptune.rate.dao.mapper: debug
+#    com.huobi.neptune.rate.service.impl: debug
+
+mybatis-plus:
+  mapper-locations: classpath:mapping/**/*.xml
